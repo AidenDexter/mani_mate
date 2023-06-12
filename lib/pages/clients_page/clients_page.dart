@@ -27,7 +27,7 @@ class ClientsPage extends StatelessWidget {
                       onPressed: () {
                         ref.read(clientsProvider.notifier).deleteById(client.id);
                       },
-                      icon: Icon(Icons.delete)),
+                      icon: const Icon(Icons.delete)),
                   IconButton(
                       onPressed: () {
                         showDialog(
@@ -36,24 +36,24 @@ class ClientsPage extends StatelessWidget {
                             return Material(
                               child: Container(
                                 color: Colors.white,
-                                margin: EdgeInsets.all(30),
+                                margin: const EdgeInsets.all(30),
                                 child: Column(
                                   children: [
-                                    TextField(),
-                                    TextField(),
-                                    TextField(),
+                                    const TextField(),
+                                    const TextField(),
+                                    const TextField(),
                                     Row(
                                       children: [
                                         ElevatedButton(
                                           onPressed: context.pop,
-                                          child: Text('close'),
+                                          child: const Text('close'),
                                         ),
                                         ElevatedButton(
                                           onPressed: () {
                                             ref.read(clientsProvider.notifier).updateClient(client.copyWith(name: 'updated'));
                                             context.pop();
                                           },
-                                          child: Text('update'),
+                                          child: const Text('update'),
                                         ),
                                       ],
                                     )
@@ -64,7 +64,7 @@ class ClientsPage extends StatelessWidget {
                           },
                         );
                       },
-                      icon: Icon(Icons.edit)),
+                      icon: const Icon(Icons.edit)),
                   const SizedBox(height: 30),
                 ],
               );
