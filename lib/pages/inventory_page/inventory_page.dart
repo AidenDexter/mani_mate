@@ -11,12 +11,12 @@ class InventoryPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('inventory'),
+            const Text('inventory'),
             ElevatedButton(
                 onPressed: () {
                   context.push('/add_client');
                 },
-                child: Text('Tap me')),
+                child: const Text('Tap me')),
           ],
         ),
       ),

@@ -36,13 +36,5 @@ class BottomBar extends ConsumerWidget {
       index,
       initialLocation: index == navigationShell.currentIndex,
     );
-    // switch (index) {
-    //   case 0:
-    //     navigationShell.goBranch('/schedule');
-    //   case 1:
-    //     navigationShell.goBranch('/clients');
-    //   case 2:
-    //     navigationShell.goBranch('/inventory');
-    // }
   }
 }
