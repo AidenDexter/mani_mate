@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mani_mate/models/note_model.dart';
+import 'note_model.dart';
 
 part 'record_model.g.dart';
 

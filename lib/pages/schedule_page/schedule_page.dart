@@ -1,9 +1,9 @@
+import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mani_mate/pages/schedule_page/state/current_date.dart';
-import 'package:infinite_carousel/infinite_carousel.dart';
-import 'package:mani_mate/providers/notes.dart';
+import 'package:go_router/go_router.dart';
 
+import 'components/date_carousel.dart';
 import 'components/notes_list.dart';
 
 class SchedulePage extends ConsumerWidget {
@@ -11,52 +11,78 @@ class SchedulePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final today = DateTime.now();
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text(
+          'Р',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Column(
         children: [
-          SizedBox(
-            height: 50,
-            child: InfiniteCarousel.builder(
-              itemCount: 3,
-              itemExtent: 70,
-              center: true,
-              itemBuilder: (context, itemIndex, realIndex) {
-                final day = today.add(Duration(days: realIndex));
-                final currentDate = ref.watch(currentDateProvider);
-                final isCurrentDateToday =
-                    day.day == currentDate.day && day.month == currentDate.month && day.year == currentDate.year;
-                return GestureDetector(
-                  onTap: () {
-                    ref.read(currentDateProvider.notifier).date = day;
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: isCurrentDateToday ? Colors.blue : Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+          const DateCarousel(),
+          const SizedBox(height: 8),
+          Expanded(
+            child: Stack(
+              children: [
+                const NotesList(),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.white, Colors.white.withOpacity(0)],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
-                    margin: const EdgeInsets.all(5),
-                    height: 50,
-                    width: 70,
-                    alignment: Alignment.center,
-                    child: Text('${day.day} ${day.month}'),
                   ),
-                );
-              },
+                  height: 40,
+                  width: double.infinity,
+                )
+              ],
             ),
           ),
-          const NotesList(),
         ],
       ),
-      floatingActionButton: FloatingActionButton.small(
-        onPressed: () {
-          final currentDate = ref.read(currentDateProvider);
-          ref.read(notesProvider.notifier).addNote(
-                startDate: currentDate,
-                endDate: currentDate.add(const Duration(hours: 2)),
-              );
-        },
+      floatingActionButton: CircularMenu(
+        alignment: Alignment.bottomRight,
+        animationDuration: const Duration(milliseconds: 300),
+        radius: 40,
+        toggleButtonSize: 30,
+        toggleButtonMargin: 0,
+        startingAngleInRadian: 3.0,
+        endingAngleInRadian: 4.5,
+        curve: Curves.easeInOut,
+        toggleButtonBoxShadow: [
+          BoxShadow(
+            color: Theme.of(context).primaryColor.withOpacity(.5),
+            blurRadius: 10,
+          ),
+        ],
+        toggleButtonAnimatedIconData: AnimatedIcons.add_event,
+        items: [
+          CircularMenuItem(
+            icon: Icons.person,
+            onTap: () => context.push('/add_note'),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).primaryColor.withOpacity(.5),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          CircularMenuItem(
+            icon: Icons.note_alt_outlined,
+            onTap: () => context.push('/add_note'),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).primaryColor.withOpacity(.5),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

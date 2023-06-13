@@ -51,5 +51,21 @@ final GoRouter _router = GoRouter(
         );
       },
     ),
+    GoRoute(
+      path: '/add_note',
+      name: 'add_note',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const AddNotePage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
   ],
 );

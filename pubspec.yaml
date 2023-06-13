@@ -17,6 +17,10 @@ dependencies:
   hive_flutter: ^1.1.0
   uuid: ^3.0.6
   infinite_carousel: ^1.0.3
+  intl: ^0.18.1
+  scrollable_positioned_list: ^0.3.8
+  flutter_animate: ^4.1.1+1
+  circular_menu: ^2.0.1
 
 dev_dependencies:
   flutter_test:

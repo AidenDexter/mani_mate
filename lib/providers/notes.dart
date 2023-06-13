@@ -1,7 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mani_mate/models/note_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
+
+import '../models/note_model.dart';
 
 part 'notes.g.dart';
 

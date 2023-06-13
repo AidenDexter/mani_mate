@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mani_mate/providers/clients.dart';
+import '../../providers/clients.dart';
 
 class ClientsPage extends StatelessWidget {
   const ClientsPage({super.key});

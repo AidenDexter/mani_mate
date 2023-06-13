@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-import 'package:mani_mate/models/client_model.dart';
+import '../models/client_model.dart';
 
 part 'clients.g.dart';
 
