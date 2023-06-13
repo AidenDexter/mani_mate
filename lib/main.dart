@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'pages/add_client_page/add_client_page.dart';
+import 'pages/client_info_page/client_info_page.dart';
 import 'pages/clients_page/clients_page.dart';
 import 'pages/inventory_page/inventory_page.dart';
 import 'pages/schedule_page/schedule_page.dart';

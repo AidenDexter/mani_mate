@@ -51,5 +51,19 @@ final GoRouter _router = GoRouter(
         );
       },
     ),
+    GoRoute(
+        path: '/client_info/:client_id',
+        name: 'client_info',
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+              key: state.pageKey,
+              child: ClientInfoPage(state.pathParameters['client_id']!),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                  child: child,
+                );
+              });
+        }),
   ],
 );
