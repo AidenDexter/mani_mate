@@ -3,20 +3,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../providers/notes.dart';
+import 'components/add_note_button.dart';
 import 'components/notes_list.dart';
 import 'components/page_app_bar.dart';
 import 'state/time.dart';
-import 'state/verify.dart';
 
 final _controller = TextEditingController();
 
-class AddNotePage extends ConsumerWidget {
+class AddNotePage extends StatelessWidget {
   const AddNotePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: const PageAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,15 +28,39 @@ class AddNotePage extends ConsumerWidget {
                   context: context,
                   builder: (context) {
                     final deviceSize = MediaQuery.of(context).size;
-                    return Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          color: Colors.white,
-                          height: deviceSize.height * .8,
-                          width: deviceSize.width * .9,
-                          child: const NotesList(),
-                        ),
+                    return Material(
+                      color: Colors.transparent,
+                      child: Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: context.pop,
+                          ),
+                          Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                color: Colors.white,
+                                height: deviceSize.height * .8,
+                                width: deviceSize.width * .9,
+                                child: const NotesList(),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: deviceSize.height * .06,
+                            right: deviceSize.width * .025,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: IconButton(
+                                onPressed: context.pop,
+                                icon: const Icon(Icons.close),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     );
                   },
@@ -49,8 +73,15 @@ class AddNotePage extends ConsumerWidget {
                 child: Row(
                   children: [
                     Expanded(
-                        child: Text(
-                            'Time: ${ref.watch(beginDateProvider) != null ? '${DateFormat('HH:mm').format(ref.watch(beginDateProvider)!)} - ' : ''}${ref.watch(endDateProvider) != null ? DateFormat('HH:mm').format(ref.watch(endDateProvider)!) : ''}')),
+                      child: Consumer(
+                        builder: (context, ref, child) {
+                          final beginDate = ref.watch(beginDateProvider);
+                          final endDate = ref.watch(endDateProvider);
+                          return Text(
+                              'Time: ${beginDate != null ? '${DateFormat('HH:mm').format(beginDate)} - ' : ''}${endDate != null ? DateFormat('HH:mm').format(endDate) : ''}');
+                        },
+                      ),
+                    ),
                     Icon(
                       Icons.edit,
                       color: Colors.black.withOpacity(.6),
@@ -60,36 +91,23 @@ class AddNotePage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 16),
-            if (ref.watch(verifyDataProvider))
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(color: Colors.red.shade100, borderRadius: BorderRadius.circular(20)),
-                  child: TextField(
-                    controller: _controller,
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    keyboardType: TextInputType.multiline,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                  ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(color: Colors.blue.withOpacity(.23), borderRadius: BorderRadius.circular(20)),
+                child: TextField(
+                  controller: _controller,
+                  maxLines: null,
+                  textCapitalization: TextCapitalization.sentences,
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(border: InputBorder.none, hintText: 'Текст заметки...'),
                 ),
-              )
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: ref.watch(verifyDataProvider)
-          ? FloatingActionButton(onPressed: () {
-              ref.read(notesProvider.notifier).addNote(
-                    startDate: ref.read(beginDateProvider)!,
-                    endDate: ref.read(endDateProvider)!,
-                    text: _controller.text,
-                  );
-              context.pop();
-              _controller.clear();
-            })
-          : null,
+      floatingActionButton: AddNoteButton(_controller),
     );
   }
 }

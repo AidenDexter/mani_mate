@@ -42,7 +42,7 @@ class DateCarousel extends ConsumerWidget {
                     style: TextStyle(fontSize: 22, color: isCurrentDateToday ? Colors.white : Colors.black),
                   ),
                   Text(
-                    DateFormat('MMMM').format(day),
+                    DateFormat('MMMM', 'ru').format(day),
                     style: TextStyle(fontSize: 12, color: isCurrentDateToday ? Colors.white : Colors.black),
                   ),
                 ],

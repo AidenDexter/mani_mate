@@ -15,7 +15,7 @@ class SchedulePage extends ConsumerWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'Р',
+          'Расписание',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
