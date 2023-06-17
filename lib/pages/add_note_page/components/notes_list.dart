@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../constants.dart';
 import '../../schedule_page/state/current_date.dart';
 import '../../schedule_page/state/page_notes.dart';
 import '../state/time.dart';
@@ -69,13 +70,27 @@ class NotesList extends ConsumerWidget {
                           if (blockNotes.isNotEmpty) {
                             return Container(
                               decoration: const BoxDecoration(
-                                color: Color.fromARGB(200, 155, 233, 168),
+                                color: noteBodyColor,
                                 border: Border.symmetric(
                                   horizontal: BorderSide(color: Colors.black12, width: .3),
                                 ),
                               ),
-                              padding: const EdgeInsets.all(4),
-                              child: blockNotes.first.startDate == time ? Text(blockNotes.first.text ?? 'bad') : null,
+                              child: blockNotes.first.startDate == time
+                                  ? Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          height: 5,
+                                          color: noteHeaderColor,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                          child: Text(blockNotes.first.text ?? 'bad'),
+                                        ),
+                                      ],
+                                    )
+                                  : null,
                             );
                           }
 
