@@ -137,6 +137,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
+  circular_menu:
+    dependency: "direct main"
+    description:
+      name: circular_menu
+      sha256: "253e5e7aaf107e84251b0c51fb66ae17f6caaebf973eb30049f02b999646373a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   cli_util:
     dependency: transitive
     description:
@@ -217,6 +225,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  easy_localization:
+    dependency: "direct main"
+    description:
+      name: easy_localization
+      sha256: "30ebf25448ffe169e0bd9bc4b5da94faa8398967a2ad2ca09f438be8b6953645"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
+  easy_logger:
+    dependency: transitive
+    description:
+      name: easy_logger
+      sha256: c764a6e024846f33405a2342caf91c62e357c24b02c04dbc712ef232bf30ffb7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -254,6 +278,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animate:
+    dependency: "direct main"
+    description:
+      name: flutter_animate
+      sha256: f611a67082d4c5ff9b8b7737ec7e675a22af70a94c8c3c22109f14b078d4d2bf
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.1+1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -262,6 +294,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -360,6 +397,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  infinite_carousel:
+    dependency: "direct main"
+    description:
+      name: infinite_carousel
+      sha256: fe04c3b08adad2ee00c9bf40b46e0ff7944d206081392c4ae0f6b82c89c6e70d
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.0"
   io:
     dependency: transitive
     description:
@@ -584,6 +637,70 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  scrollable_positioned_list:
+    dependency: "direct main"
+    description:
+      name: scrollable_positioned_list
+      sha256: "1b54d5f1329a1e263269abc9e2543d90806131aa14fe7c6062a8054d57249287"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.8"
+  shared_preferences:
+    dependency: transitive
+    description:
+      name: shared_preferences
+      sha256: "396f85b8afc6865182610c0a2fc470853d56499f75f7499e2a73a9f0539d23d0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      sha256: "6478c6bbbecfe9aced34c483171e90d7c078f5883558b30ec3163cf18402c749"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
+  shared_preferences_foundation:
+    dependency: transitive
+    description:
+      name: shared_preferences_foundation
+      sha256: e014107bb79d6d3297196f4f2d0db54b5d1f85b8ea8ff63b8e8b391a02700feb
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      sha256: fb5cf25c0235df2d0640ac1b1174f6466bd311f621574997ac59018a6664548d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   shelf:
     dependency: transitive
     description:
@@ -669,6 +786,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "8db8f55c77f56968681447d3837c10f27a9e861e238a898fda116c7531def979"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_flutter_datepicker:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_datepicker
+      sha256: "6b0dacfe2f968de2b9107e2dc24fcaa2499415ae655df8f0d3ad0356eb090213"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
   term_glyph:
     dependency: transitive
     description:

@@ -65,5 +65,37 @@ final GoRouter _router = GoRouter(
                 );
               });
         }),
+    GoRoute(
+      path: '/add_note',
+      name: 'add_note',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: AddNotePage(state.extra as DateTime?),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: '/edit_note',
+      name: 'edit_note',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: EditNotePage(state.extra as NoteModel),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
   ],
 );

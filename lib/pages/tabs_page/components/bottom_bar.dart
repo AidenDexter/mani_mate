@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mani_mate/pages/tabs_page/tabs_page_model.dart';
+import '../tabs_page_model.dart';
 
 class BottomBar extends ConsumerWidget {
   const BottomBar(this.navigationShell, {super.key});
