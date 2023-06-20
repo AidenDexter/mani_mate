@@ -36,22 +36,6 @@ final GoRouter _router = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/add_client',
-      name: 'add_client',
-      pageBuilder: (context, state) {
-        return CustomTransitionPage(
-          key: state.pageKey,
-          child: const AddClientPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-              child: child,
-            );
-          },
-        );
-      },
-    ),
-    GoRoute(
         path: '/client_info/:client_id',
         name: 'client_info',
         pageBuilder: (context, state) {

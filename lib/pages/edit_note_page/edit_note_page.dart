@@ -90,7 +90,7 @@ class _EditNotePageState extends ConsumerState<EditNotePage> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Time: ${beginDate != null ? '${DateFormat('HH:mm').format(beginDate)} - ' : ''}${endDate != null ? DateFormat('HH:mm').format(endDate) : ''}',
+                        'Time: ${'${DateFormat('HH:mm').format(beginDate)} - '}${DateFormat('HH:mm').format(endDate)}',
                       ),
                     ),
                     Icon(

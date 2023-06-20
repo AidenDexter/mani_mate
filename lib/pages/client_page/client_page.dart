@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mani_mate/pages/client_page/state/page_client.dart';
 
 import '../../providers/clients.dart';
 import 'state/current_tab.dart';
+import 'state/page_client.dart';
 
 class ClientAndServicesPage extends ConsumerWidget {
   final String clientId;
@@ -32,7 +32,7 @@ class ClientAndServicesPage extends ConsumerWidget {
             children: [
               const SizedBox(width: 16),
               Container(
-                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.black)),
+                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all()),
                 width: 65,
                 height: 65,
                 child: const Icon(

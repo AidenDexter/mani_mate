@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mani_mate/providers/clients.dart';
+import '../../providers/clients.dart';
 
 import 'add_client_dialog.dart';
 
@@ -53,13 +53,12 @@ class ClientsPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 28),
                                     child: Container(
                                         decoration: BoxDecoration(
-                                            shape: BoxShape.circle, border: Border.all(color: Colors.black)),
+                                            shape: BoxShape.circle, border: Border.all()),
                                         width: 65,
                                         height: 65,
                                         child: const Icon(

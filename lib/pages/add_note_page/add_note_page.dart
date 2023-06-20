@@ -77,7 +77,7 @@ class AddNotePage extends StatelessWidget {
                       child: Consumer(
                         builder: (context, ref, child) {
                           final beginDate = ref.watch(beginDateProvider(beginDateTime));
-                          final endDate = ref.watch(endDateProvider(beginDateTime?.add(Duration(minutes: 30))));
+                          final endDate = ref.watch(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))));
                           return Text(
                               'Time: ${beginDate != null ? '${DateFormat('HH:mm').format(beginDate)} - ' : ''}${endDate != null ? DateFormat('HH:mm').format(endDate) : ''}');
                         },

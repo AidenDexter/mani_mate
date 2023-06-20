@@ -1,6 +1,8 @@
-import 'package:mani_mate/models/client_model.dart';
-import 'package:mani_mate/providers/clients.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../models/client_model.dart';
+import '../../../providers/clients.dart';
+
 part 'page_client.g.dart';
 
 @riverpod

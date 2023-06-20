@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'models/note_model.dart';
-import 'pages/add_client_page/add_client_page.dart';
 import 'pages/add_note_page/add_note_page.dart';
 import 'pages/client_and_services_page/client_and_services_page.dart';
 import 'pages/client_page/client_page.dart';
