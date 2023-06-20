@@ -57,7 +57,7 @@ final GoRouter _router = GoRouter(
         pageBuilder: (context, state) {
           return CustomTransitionPage(
               key: state.pageKey,
-              child: ClientInfoPage(state.pathParameters['client_id']!),
+              child: ClientAndServicesPage(state.pathParameters['client_id']!),
               transitionsBuilder: (context, animation, secondaryAnimation, child) {
                 return FadeTransition(
                   opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),

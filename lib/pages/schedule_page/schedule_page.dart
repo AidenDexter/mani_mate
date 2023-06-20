@@ -23,12 +23,6 @@ class SchedulePage extends ConsumerWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    ref.read(clientsProvider.notifier).add();
-                  },
-                  child: const Text('add'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
                     ref.read(clientsProvider.notifier).clear();
                   },
                   child: const Text('clear'),
