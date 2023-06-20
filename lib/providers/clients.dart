@@ -19,8 +19,8 @@ class Clients extends _$Clients {
     return box.values.toList();
   }
 
-  Future<void> add() async {
-    await box.add(ClientModel(uuid.v1(), 'test', '999999', 'заметка'));
+  Future<void> add(String name, String phone, String note) async {
+    await box.add(ClientModel(uuid.v1(), name, phone, note));
     state = AsyncValue.data(box.values.toList());
   }
 
