@@ -69,7 +69,7 @@ class NotesList extends ConsumerWidget {
                                       time.isBefore(element.endDate))
                                   .toList();
                               return NoteWidget(
-                                blockNotes: blockNotes,
+                                note: blockNotes.isEmpty ? null : blockNotes.first,
                                 time: time,
                               );
                             },

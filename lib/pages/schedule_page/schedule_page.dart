@@ -58,7 +58,7 @@ class SchedulePage extends ConsumerWidget {
         items: [
           CircularMenuItem(
             icon: Icons.person,
-            onTap: () => context.push('/add_note'),
+            onTap: () => context.push('/add_record'),
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).primaryColor.withOpacity(.5),

@@ -32,10 +32,10 @@ class Notes extends _$Notes {
     state = AsyncValue.data(box.values.toList());
   }
 
-    Future<void> updateNote(NoteModel client) async {
-    final index = state.value?.indexWhere((element) => element.id == client.id);
+    Future<void> updateNote(NoteModel note) async {
+    final index = state.value?.indexWhere((element) => element.id == note.id);
     if (index == null) return;
-    await box.putAt(index, client);
+    await box.putAt(index, note);
     state = AsyncValue.data(box.values.toList());
   }
 }
