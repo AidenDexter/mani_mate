@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../schedule_page/state/current_date.dart';
+import '../pages/schedule_page/state/current_date.dart';
 
-class PageAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const PageAppBar({super.key});
+class CurrentDateAppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const CurrentDateAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

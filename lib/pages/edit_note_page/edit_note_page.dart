@@ -3,19 +3,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../models/note_model.dart';
 import '../../widgets/current_date_app_bar.dart';
-import 'components/add_note_button.dart';
-import 'components/add_notes_list.dart';
+import 'components/edit_note_button.dart';
+import 'components/edit_notes_list.dart';
 import 'state/time.dart';
 
-final _controller = TextEditingController();
+class EditNotePage extends ConsumerStatefulWidget {
+  final NoteModel note;
+  const EditNotePage(this.note, {super.key});
 
-class AddNotePage extends StatelessWidget {
-  final DateTime? beginDateTime;
-  const AddNotePage(this.beginDateTime, {super.key});
+  @override
+  ConsumerState<EditNotePage> createState() => _EditNotePageState();
+}
+
+class _EditNotePageState extends ConsumerState<EditNotePage> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    _controller = TextEditingController(text: widget.note.text);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final beginDate = ref.watch(beginDateProvider(widget.note.startDate));
+    final endDate = ref.watch(endDateProvider(widget.note.endDate));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const CurrentDateAppBar(),
@@ -43,7 +58,7 @@ class AddNotePage extends StatelessWidget {
                                 color: Colors.white,
                                 height: deviceSize.height * .8,
                                 width: deviceSize.width * .9,
-                                child: AddNotesList(beginDateTime),
+                                child: EditNotesList(widget.note),
                               ),
                             ),
                           ),
@@ -74,13 +89,8 @@ class AddNotePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Consumer(
-                        builder: (context, ref, child) {
-                          final beginDate = ref.watch(beginDateProvider(beginDateTime));
-                          final endDate = ref.watch(endDateProvider(beginDateTime?.add(Duration(minutes: 30))));
-                          return Text(
-                              'Time: ${beginDate != null ? '${DateFormat('HH:mm').format(beginDate)} - ' : ''}${endDate != null ? DateFormat('HH:mm').format(endDate) : ''}');
-                        },
+                      child: Text(
+                        'Time: ${beginDate != null ? '${DateFormat('HH:mm').format(beginDate)} - ' : ''}${endDate != null ? DateFormat('HH:mm').format(endDate) : ''}',
                       ),
                     ),
                     Icon(
@@ -108,7 +118,7 @@ class AddNotePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: AddNoteButton(_controller, beginDateTime),
+      floatingActionButton: EditNoteButton(_controller, widget.note),
     );
   }
 }

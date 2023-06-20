@@ -13,37 +13,31 @@ class SchedulePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          'Расписание',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          const DateCarousel(),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Stack(
-              children: [
-                const NotesList(),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.white, Colors.white.withOpacity(0)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const DateCarousel(),
+            const SizedBox(height: 8),
+            Expanded(
+              child: Stack(
+                children: [
+                  const NotesList(),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.white, Colors.white.withOpacity(0)],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
                     ),
-                  ),
-                  height: 40,
-                  width: double.infinity,
-                )
-              ],
+                    height: 40,
+                    width: double.infinity,
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: CircularMenu(
         alignment: Alignment.bottomRight,

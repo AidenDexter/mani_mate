@@ -9,8 +9,9 @@ import '../../schedule_page/state/current_date.dart';
 import '../../schedule_page/state/page_notes.dart';
 import '../state/time.dart';
 
-class NotesList extends ConsumerWidget {
-  const NotesList({super.key});
+class AddNotesList extends ConsumerWidget {
+  const AddNotesList(this.beginDateTime, {super.key});
+  final DateTime? beginDateTime;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +33,7 @@ class NotesList extends ConsumerWidget {
             Expanded(
               child: Center(
                 child: Container(
-                  padding: EdgeInsets.all(index % 2 == 0 ? 0 : 4),
+                  padding: EdgeInsets.all(nowMinute ~/ 30 == index ? 0 : 8),
                   decoration: BoxDecoration(
                     color: nowMinute ~/ 30 == index ? Colors.blue : Colors.white,
                     borderRadius: BorderRadius.circular(5),
@@ -40,7 +41,7 @@ class NotesList extends ConsumerWidget {
                   child: Text(
                     DateFormat('HH:mm').format(time),
                     style: TextStyle(
-                      fontSize: index % 2 == 0 ? 14 : 10,
+                      fontSize: index % 2 == 0 ? 16 : 12,
                       color: nowMinute ~/ 30 == index ? Colors.white : Colors.black,
                     ),
                   ),
@@ -52,7 +53,6 @@ class NotesList extends ConsumerWidget {
               width: 1,
               decoration: BoxDecoration(color: Colors.black.withOpacity(.2), borderRadius: BorderRadius.circular(5)),
             ),
-            const SizedBox(width: 4),
             Expanded(
               flex: 5,
               child: ConstrainedBox(
@@ -94,8 +94,8 @@ class NotesList extends ConsumerWidget {
                             );
                           }
 
-                          final beginTime = ref.watch(beginDateProvider);
-                          final endTime = ref.watch(endDateProvider);
+                          final beginTime = ref.watch(beginDateProvider(beginDateTime));
+                          final endTime = ref.watch(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))));
                           bool isChosen = false;
                           if (beginTime != null && endTime != null) {
                             isChosen =
@@ -104,23 +104,28 @@ class NotesList extends ConsumerWidget {
                           return GestureDetector(
                             onTap: () {
                               if (beginTime == null && endTime == null) {
-                                ref.read(beginDateProvider.notifier).date = time;
-                                ref.read(endDateProvider.notifier).date = time.add(const Duration(minutes: 30));
+                                ref.read(beginDateProvider(beginDateTime).notifier).date = time;
+                                ref
+                                    .read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))).notifier)
+                                    .date = time.add(const Duration(minutes: 30));
                                 return;
                               }
 
                               if (time == endTime) {
-                                ref.read(endDateProvider.notifier).date = time.add(const Duration(minutes: 30));
+                                ref
+                                    .read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))).notifier)
+                                    .date = time.add(const Duration(minutes: 30));
                                 return;
                               }
 
                               if (time.add(const Duration(minutes: 30)) == beginTime) {
-                                ref.read(beginDateProvider.notifier).date = time;
+                                ref.read(beginDateProvider(beginDateTime).notifier).date = time;
                                 return;
                               }
 
-                              ref.read(beginDateProvider.notifier).date = time;
-                              ref.read(endDateProvider.notifier).date = time.add(const Duration(minutes: 30));
+                              ref.read(beginDateProvider(beginDateTime).notifier).date = time;
+                              ref.read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))).notifier).date =
+                                  time.add(const Duration(minutes: 30));
                             },
                             child: Container(
                               decoration: BoxDecoration(

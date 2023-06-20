@@ -22,6 +22,7 @@ dependencies:
   flutter_animate: ^4.1.1+1
   circular_menu: ^2.0.1
   easy_localization: ^3.0.2
+  syncfusion_flutter_datepicker: ^21.2.10
 
 dev_dependencies:
   flutter_test:

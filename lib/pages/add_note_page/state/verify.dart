@@ -4,17 +4,9 @@ import 'time.dart';
 
 part 'verify.g.dart';
 
-// @riverpod
-// class BeginDate extends _$BeginDate {
-//   @override
-//   DateTime? build() => null;
-
-//   set date(DateTime value) => state = value;
-// }
-
 @riverpod
-bool verifyData(VerifyDataRef ref) {
-  final beginDate = ref.watch(beginDateProvider);
-  final endDate = ref.watch(endDateProvider);
+bool verifyData(VerifyDataRef ref, {DateTime? beginDateTime}) {
+  final beginDate = ref.watch(beginDateProvider(beginDateTime));
+  final endDate = ref.watch(endDateProvider(beginDateTime?.add(Duration(minutes: 30))));
   return beginDate != null && endDate != null && beginDate.isBefore(endDate);
 }
