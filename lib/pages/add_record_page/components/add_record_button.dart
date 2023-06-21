@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../providers/records.dart';
+import '../../../providers/time.dart';
 import '../state/current_client.dart';
-import '../state/time.dart';
 import '../state/verify.dart';
 
 class AddRecordButton extends ConsumerWidget {
@@ -20,11 +20,11 @@ class AddRecordButton extends ConsumerWidget {
         ? FloatingActionButton(
             onPressed: () {
               ref.read(recordsProvider.notifier).addRecord(
-                    clientId: ref.read(currentClientProvider)!.id,
+                    clientId: ref.read(currentClientProvider())!.id,
                     startDate: ref.read(beginDateProvider(beginDateTime))!,
                     endDate: ref.read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))))!,
                     text: noteController.text,
-                    price: priceController.text.trim().isEmpty?null: int.parse(priceController.text),
+                    price: priceController.text.trim().isEmpty ? null : int.parse(priceController.text),
                   );
               context.pop();
               noteController.clear();

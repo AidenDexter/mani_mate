@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'time.dart';
+import '../../../providers/time.dart';
 
 part 'verify.g.dart';
 

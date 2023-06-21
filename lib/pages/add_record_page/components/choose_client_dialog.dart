@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../models/client_model.dart';
 import '../../../providers/clients.dart';
 import '../state/current_client.dart';
 
 class ChooseClientDialog extends StatelessWidget {
-  const ChooseClientDialog({super.key});
+  final ClientModel? initClient;
+  const ChooseClientDialog({this.initClient, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ChooseClientDialog extends StatelessWidget {
                 child: Consumer(
                   builder: (context, ref, child) {
                     final clients = ref.watch(clientsProvider);
-                    final currentClient = ref.watch(currentClientProvider);
+                    final currentClient = ref.watch(currentClientProvider(initClient: initClient));
 
                     return clients.when(
                       data: (clients) {
@@ -47,7 +49,7 @@ class ChooseClientDialog extends StatelessWidget {
                             final isChosen = currentClient?.id == clients[index].id;
                             return GestureDetector(
                               onTap: () {
-                                ref.read(currentClientProvider.notifier).client = clients[index];
+                                ref.read(currentClientProvider(initClient: initClient).notifier).client = clients[index];
                               },
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 150),

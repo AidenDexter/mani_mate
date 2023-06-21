@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../providers/notes.dart';
-import '../state/time.dart';
+import '../../../providers/time.dart';
 import '../state/verify.dart';
 
 class AddNoteButton extends ConsumerWidget {

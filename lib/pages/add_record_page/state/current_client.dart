@@ -7,7 +7,7 @@ part 'current_client.g.dart';
 @riverpod
 class CurrentClient extends _$CurrentClient {
   @override
-  ClientModel? build() => null;
+  ClientModel? build({ClientModel? initClient}) => initClient;
 
   set client(ClientModel newClient) => state = newClient;
 }

@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/note_model.dart';
+import '../../providers/time.dart';
 import '../../widgets/current_date_app_bar.dart';
 import 'components/edit_note_button.dart';
 import 'components/edit_notes_list.dart';
-import 'state/time.dart';
 
 class EditNotePage extends ConsumerStatefulWidget {
   final NoteModel note;
@@ -90,7 +90,7 @@ class _EditNotePageState extends ConsumerState<EditNotePage> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Time: ${'${DateFormat('HH:mm').format(beginDate)} - '}${DateFormat('HH:mm').format(endDate)}',
+                        'Time: ${'${DateFormat('HH:mm').format(beginDate!)} - '}${DateFormat('HH:mm').format(endDate!)}',
                       ),
                     ),
                     Icon(

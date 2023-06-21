@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../constants.dart';
+import '../../../models/record_model.dart';
+import '../../../providers/time.dart';
 import '../../schedule_page/state/current_date.dart';
 import '../../schedule_page/state/page_notes.dart';
-import '../state/time.dart';
 
 class AddRecordsList extends ConsumerWidget {
   const AddRecordsList(this.beginDateTime, {super.key});
@@ -68,27 +69,22 @@ class AddRecordsList extends ConsumerWidget {
                                   time.isBefore(element.endDate))
                               .toList();
                           if (blockNotes.isNotEmpty) {
+                            final isRecord = blockNotes.first is RecordModel;
                             return Container(
-                              decoration: const BoxDecoration(
-                                color: noteBodyColor,
-                                border: Border.symmetric(
+                              decoration: BoxDecoration(
+                                color: isRecord ? recordBodyColor : noteBodyColor,
+                                border: const Border.symmetric(
                                   horizontal: BorderSide(color: Colors.black12, width: .3),
                                 ),
                               ),
                               child: blockNotes.first.startDate == time
-                                  ? Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: double.infinity,
-                                          height: 5,
-                                          color: noteHeaderColor,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                          child: Text(blockNotes.first.text ?? 'bad'),
-                                        ),
-                                      ],
+                                  ? Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 5,
+                                        color: isRecord ? recordHeaderColor : noteHeaderColor,
+                                      ),
                                     )
                                   : null,
                             );

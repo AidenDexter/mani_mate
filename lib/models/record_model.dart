@@ -34,6 +34,7 @@ class RecordModel extends NoteModel {
     int? price,
     DateTime? startDate,
     DateTime? endDate,
+    String? text,
   }) {
     return RecordModel(
       id: id ?? this.id,
@@ -41,6 +42,7 @@ class RecordModel extends NoteModel {
       price: price ?? this.price,
       endDate: endDate ?? this.endDate,
       startDate: startDate ?? this.startDate,
+      text: text ?? this.text,
     );
   }
 }

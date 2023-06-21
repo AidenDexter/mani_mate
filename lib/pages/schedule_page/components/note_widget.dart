@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
 import '../../../constants.dart';
 import '../../../models/note_model.dart';
 import '../../../models/record_model.dart';
 import '../../../providers/clients.dart';
-import '../../../providers/notes.dart';
-import '../../../providers/records.dart';
+import '../dialogs/delete_confirm_dialog.dart';
+import '../dialogs/edit_record_dialog.dart';
 
 class NoteWidget extends ConsumerWidget {
   const NoteWidget({super.key, required this.note, required this.time});
@@ -39,47 +38,16 @@ class NoteWidget extends ConsumerWidget {
       ],
     ).then((value) {
       if (value == 'delete') {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return DeleteConfirmDialog(note: note!);
+          },
+        );
+      } else if (value == 'edit') {
         note is RecordModel
-            ? ref.read(recordsProvider.notifier).deleteRecordById(note!.id)
-            : showDialog(
-                context: context,
-                builder: (context) {
-                  return Dialog(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Вы действительно хотите удалить эту запись?',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          const SizedBox(height: 12),
-                          Text('Текст: ${note?.text ?? ''}'),
-                          Text(
-                              'Время: ${'${DateFormat('HH:mm').format(note!.startDate)} - '}${DateFormat('HH:mm').format(note!.endDate)}'),
-                          const SizedBox(height: 12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              TextButton(onPressed: context.pop, child: const Text('Отмена')),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    ref.read(notesProvider.notifier).deleteNoteById(note!.id);
-                                    context.pop();
-                                  },
-                                  child: const Text('Удалить')),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
-      } else if (value == 'edit'){
-        context.push('/edit_note', extra: note);
+            ? showDialog(context: context, builder: (context) => EditRecordDialog(note as RecordModel))
+            : context.push('/edit_note', extra: note);
       }
     });
   }
@@ -97,14 +65,20 @@ class NoteWidget extends ConsumerWidget {
       ),
       items: [
         const PopupMenuItem(
-          value: 'add',
-          child: Text('add'),
+          value: 'note',
+          child: Text('Заметка'),
+        ),
+        const PopupMenuItem(
+          value: 'client',
+          child: Text('Клиент'),
         ),
       ],
     ).then((value) {
       switch (value) {
-        case 'add':
+        case 'note':
           context.push('/add_note', extra: time);
+        case 'client':
+          context.push('/add_record', extra: time);
       }
     });
   }
@@ -141,7 +115,7 @@ class NoteWidget extends ConsumerWidget {
                         final clients = ref.watch(clientsProvider).value;
                         final currentClient = clients?.firstWhere((element) => element.id == record.clientId);
                         return currentClient == null
-                            ? SizedBox.shrink()
+                            ? const SizedBox.shrink()
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

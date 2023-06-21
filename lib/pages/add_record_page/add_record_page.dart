@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../providers/time.dart';
 import '../../widgets/current_date_app_bar.dart';
 import 'components/add_record_button.dart';
 import 'components/add_records_list.dart';
 import 'components/choose_client_dialog.dart';
 import 'state/current_client.dart';
-import 'state/time.dart';
 
 final _noteController = TextEditingController();
 final _priceController = TextEditingController();
@@ -19,7 +19,7 @@ class AddRecordPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentClient = ref.watch(currentClientProvider);
+    final currentClient = ref.watch(currentClientProvider());
     final beginDate = ref.watch(beginDateProvider(beginDateTime));
     final endDate = ref.watch(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))));
     return Scaffold(
