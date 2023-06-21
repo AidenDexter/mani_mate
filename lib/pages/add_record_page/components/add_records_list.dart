@@ -10,8 +10,8 @@ import '../../../providers/time.dart';
 import '../../schedule_page/state/current_date.dart';
 import '../../schedule_page/state/page_notes.dart';
 
-class AddNotesList extends ConsumerWidget {
-  const AddNotesList(this.beginDateTime, {super.key});
+class AddRecordsList extends ConsumerWidget {
+  const AddRecordsList(this.beginDateTime, {super.key});
   final DateTime? beginDateTime;
 
   @override

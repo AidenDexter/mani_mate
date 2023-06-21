@@ -10,9 +10,9 @@ import '../../../providers/time.dart';
 import '../../schedule_page/state/current_date.dart';
 import '../../schedule_page/state/page_notes.dart';
 
-class AddNotesList extends ConsumerWidget {
-  const AddNotesList(this.beginDateTime, {super.key});
-  final DateTime? beginDateTime;
+class EditRecordsList extends ConsumerWidget {
+  final RecordModel record;
+  const EditRecordsList(this.record, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -68,7 +68,7 @@ class AddNotesList extends ConsumerWidget {
                                   element.startDate.isBefore(time.add(const Duration(minutes: 1))) &&
                                   time.isBefore(element.endDate))
                               .toList();
-                          if (blockNotes.isNotEmpty) {
+                          if (blockNotes.isNotEmpty && blockNotes.first.id != record.id) {
                             final isRecord = blockNotes.first is RecordModel;
                             return Container(
                               decoration: BoxDecoration(
@@ -90,8 +90,8 @@ class AddNotesList extends ConsumerWidget {
                             );
                           }
 
-                          final beginTime = ref.watch(beginDateProvider(beginDateTime));
-                          final endTime = ref.watch(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))));
+                          final beginTime = ref.watch(beginDateProvider(record.startDate));
+                          final endTime = ref.watch(endDateProvider(record.endDate));
                           bool isChosen = false;
                           if (beginTime != null && endTime != null) {
                             isChosen =
@@ -99,28 +99,17 @@ class AddNotesList extends ConsumerWidget {
                           }
                           return GestureDetector(
                             onTap: () {
-                              if (beginTime == null && endTime == null) {
-                                ref.read(beginDateProvider(beginDateTime).notifier).date = time;
-                                ref
-                                    .read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))).notifier)
-                                    .date = time.add(const Duration(minutes: 30));
-                                return;
-                              }
-
                               if (time == endTime) {
-                                ref
-                                    .read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))).notifier)
-                                    .date = time.add(const Duration(minutes: 30));
+                                ref.read(endDateProvider(record.endDate).notifier).date =
+                                    time.add(const Duration(minutes: 30));
                                 return;
                               }
-
                               if (time.add(const Duration(minutes: 30)) == beginTime) {
-                                ref.read(beginDateProvider(beginDateTime).notifier).date = time;
+                                ref.read(beginDateProvider(record.startDate).notifier).date = time;
                                 return;
                               }
-
-                              ref.read(beginDateProvider(beginDateTime).notifier).date = time;
-                              ref.read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))).notifier).date =
+                              ref.read(beginDateProvider(record.startDate).notifier).date = time;
+                              ref.read(endDateProvider(record.endDate).notifier).date =
                                   time.add(const Duration(minutes: 30));
                             },
                             child: Container(

@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../providers/time.dart';
 import '../../widgets/current_date_app_bar.dart';
 import 'components/add_note_button.dart';
 import 'components/add_notes_list.dart';
-import 'state/time.dart';
 
 final _controller = TextEditingController();
 

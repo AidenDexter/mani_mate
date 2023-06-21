@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../models/note_model.dart';
 import '../../../providers/notes.dart';
-import '../state/time.dart';
+import '../../../providers/time.dart';
 
 class EditNoteButton extends ConsumerWidget {
   final TextEditingController controller;

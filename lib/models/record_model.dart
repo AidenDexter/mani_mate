@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'note_model.dart';
 
 part 'record_model.g.dart';
@@ -25,4 +27,22 @@ class RecordModel extends NoteModel {
           endDate: endDate,
           text: text,
         );
+
+  RecordModel copyWithField({
+    String? id,
+    String? clientId,
+    int? price,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? text,
+  }) {
+    return RecordModel(
+      id: id ?? this.id,
+      clientId: clientId ?? this.clientId,
+      price: price ?? this.price,
+      endDate: endDate ?? this.endDate,
+      startDate: startDate ?? this.startDate,
+      text: text ?? this.text,
+    );
+  }
 }

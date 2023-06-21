@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../providers/notes.dart';
+import '../../../providers/records.dart';
 import '../../../providers/time.dart';
+import '../state/current_client.dart';
 import '../state/verify.dart';
 
-class AddNoteButton extends ConsumerWidget {
-  final TextEditingController controller;
+class AddRecordButton extends ConsumerWidget {
+  final TextEditingController noteController;
+  final TextEditingController priceController;
+
   final DateTime? beginDateTime;
-  const AddNoteButton(this.controller, this.beginDateTime, {super.key});
+  const AddRecordButton(this.noteController, this.priceController, this.beginDateTime, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(verifyDataProvider(beginDateTime: beginDateTime))
         ? FloatingActionButton(
             onPressed: () {
-              ref.read(notesProvider.notifier).addNote(
+              ref.read(recordsProvider.notifier).addRecord(
+                    clientId: ref.read(currentClientProvider())!.id,
                     startDate: ref.read(beginDateProvider(beginDateTime))!,
                     endDate: ref.read(endDateProvider(beginDateTime?.add(const Duration(minutes: 30))))!,
-                    text: controller.text,
+                    text: noteController.text,
+                    price: priceController.text.trim().isEmpty ? null : int.parse(priceController.text),
                   );
               context.pop();
-              controller.clear();
+              noteController.clear();
             },
             child: const Icon(Icons.done),
           )

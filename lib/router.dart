@@ -81,5 +81,21 @@ final GoRouter _router = GoRouter(
         );
       },
     ),
+    GoRoute(
+      path: '/add_record',
+      name: 'add_record',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: AddRecordPage(state.extra as DateTime?),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
   ],
 );

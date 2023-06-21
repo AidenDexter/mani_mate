@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/client_model.dart';
+import 'records.dart';
 
 part 'clients.g.dart';
 
@@ -34,6 +35,7 @@ class Clients extends _$Clients {
     if (index == null) return;
     await box.deleteAt(index);
     state = AsyncValue.data(box.values.toList());
+    ref.read(recordsProvider.notifier).deleteRecordsByClientId(id);
   }
 
   Future<void> updateClient(ClientModel client) async {

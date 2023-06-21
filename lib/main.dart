@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'models/note_model.dart';
 import 'pages/add_note_page/add_note_page.dart';
+import 'pages/add_record_page/add_record_page.dart';
 import 'pages/client_and_services_page/client_and_services_page.dart';
 import 'pages/client_page/client_page.dart';
 import 'pages/edit_note_page/edit_note_page.dart';
