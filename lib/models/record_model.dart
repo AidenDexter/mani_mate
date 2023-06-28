@@ -21,11 +21,13 @@ class RecordModel extends NoteModel {
     required DateTime endDate,
     this.price,
     String? text,
+    required int timeOfCreate,
   }) : super(
           id: id,
           startDate: startDate,
           endDate: endDate,
           text: text,
+          timeOfCreate: timeOfCreate,
         );
 
   RecordModel copyWithField({
@@ -35,6 +37,7 @@ class RecordModel extends NoteModel {
     DateTime? startDate,
     DateTime? endDate,
     String? text,
+    int? timeOfCreate,
   }) {
     return RecordModel(
       id: id ?? this.id,
@@ -43,6 +46,7 @@ class RecordModel extends NoteModel {
       endDate: endDate ?? this.endDate,
       startDate: startDate ?? this.startDate,
       text: text ?? this.text,
+      timeOfCreate: timeOfCreate ?? this.timeOfCreate,
     );
   }
 }

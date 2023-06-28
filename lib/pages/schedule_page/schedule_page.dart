@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../providers/notification.dart';
 import 'components/date_carousel.dart';
 import 'components/notes_list.dart';
 
@@ -58,7 +59,10 @@ class SchedulePage extends ConsumerWidget {
         items: [
           CircularMenuItem(
             icon: Icons.person,
-            onTap: () => context.push('/add_record'),
+            onTap: () {
+              ref.read(notificationProvider).value!.sendNotification('Скоро кeлиент!', 'w');
+              context.push('/add_record');
+            },
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).primaryColor.withOpacity(.5),
@@ -68,7 +72,9 @@ class SchedulePage extends ConsumerWidget {
           ),
           CircularMenuItem(
             icon: Icons.note_alt_outlined,
-            onTap: () => context.push('/add_note'),
+            onTap: () {
+              context.push('/add_note');
+            },
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).primaryColor.withOpacity(.5),

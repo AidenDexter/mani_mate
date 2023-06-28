@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -14,12 +15,15 @@ class NoteModel {
   final DateTime endDate;
   @HiveField(3)
   final String? text;
+  @HiveField(6)
+  final int timeOfCreate;
 
   const NoteModel({
     required this.id,
     required this.startDate,
     required this.endDate,
     this.text,
+    required this.timeOfCreate,
   });
 
   NoteModel copyWith({
@@ -27,12 +31,14 @@ class NoteModel {
     DateTime? startDate,
     DateTime? endDate,
     String? text,
+    int? timeOfCreate,
   }) {
     return NoteModel(
       id: id ?? this.id,
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       text: text ?? this.text,
+      timeOfCreate: timeOfCreate ?? this.timeOfCreate,
     );
   }
 }
