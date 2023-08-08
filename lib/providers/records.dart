@@ -3,6 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/record_model.dart';
+import 'clients.dart';
+import 'notification.dart';
 
 part 'records.g.dart';
 
@@ -26,23 +28,27 @@ class Records extends _$Records {
     required DateTime endDate,
     String? text,
     int? price,
+    required int timeOfCreate,
   }) async {
-    await box.add(
-      RecordModel(
-        id: uuid.v1(),
-        clientId: clientId,
-        startDate: startDate,
-        endDate: endDate,
-        text: text,
-        price: price,
-      ),
+    final newNote = RecordModel(
+      id: uuid.v1(),
+      clientId: clientId,
+      startDate: startDate,
+      endDate: endDate,
+      text: text,
+      price: price,
+      timeOfCreate: timeOfCreate,
     );
+    await box.add(newNote);
+    final client = ref.read(clientsProvider).value!.firstWhere((element) => element.id == newNote.clientId);
+    ref.read(notificationProvider).value!.scheduleRecordNotification(newNote, client.name);
     state = AsyncValue.data(box.values.toList());
   }
 
   Future<void> deleteRecordById(String id) async {
     final index = state.value?.indexWhere((element) => element.id == id);
     if (index == null) return;
+    ref.read(notificationProvider).value!.deleteNotification(state.value![index].timeOfCreate);
     await box.deleteAt(index);
     state = AsyncValue.data(box.values.toList());
   }

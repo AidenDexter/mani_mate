@@ -9,20 +9,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  circular_menu: ^2.0.1
   cupertino_icons: ^1.0.2
+  easy_localization: ^3.0.2
+  flutter_animate: ^4.1.1+1
+  flutter_local_notifications: ^14.1.1
   flutter_riverpod: ^2.3.6
   go_router: ^8.0.1
-  riverpod_annotation: ^2.1.1
-  hive: ^2.2.3
   hive_flutter: ^1.1.0
-  uuid: ^3.0.6
+  hive: ^2.2.3
   infinite_carousel: ^1.0.3
   intl: ^0.18.0
+  riverpod_annotation: ^2.1.1
   scrollable_positioned_list: ^0.3.8
-  flutter_animate: ^4.1.1+1
-  circular_menu: ^2.0.1
-  easy_localization: ^3.0.2
   syncfusion_flutter_datepicker: ^21.2.10
+  uuid: ^3.0.6
+  unixtime: ^1.0.0
 
 dev_dependencies:
   flutter_test:
