@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../models/client_model.dart';
 import '../../../providers/clients.dart';
+import '../../client_and_services_page/components/add_client_dialog.dart';
 import '../state/current_client.dart';
 
 class ChooseClientDialog extends StatelessWidget {
@@ -42,14 +43,21 @@ class ChooseClientDialog extends StatelessWidget {
                           itemBuilder: (context, index) {
                             if (index == clients.length) {
                               return TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return const AddClientDialog();
+                                      });
+                                },
                                 child: const Text('Добавить клиента'),
                               );
                             }
                             final isChosen = currentClient?.id == clients[index].id;
                             return GestureDetector(
                               onTap: () {
-                                ref.read(currentClientProvider(initClient: initClient).notifier).client = clients[index];
+                                ref.read(currentClientProvider(initClient: initClient).notifier).client =
+                                    clients[index];
                               },
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 150),

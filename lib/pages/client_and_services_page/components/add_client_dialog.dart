@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/clients.dart';
+import '../../../providers/clients.dart';
 
 class AddClientDialog extends StatefulWidget {
-  const AddClientDialog({
-    super.key,
-  });
+  const AddClientDialog({super.key});
 
   @override
   State<AddClientDialog> createState() => _AddClientDialogState();
@@ -185,8 +184,82 @@ class _AddClientDialogState extends State<AddClientDialog> {
                   },
                 ),
               ],
-            )
+            ),
+            TextButton(
+              onPressed: () {
+                context.pop();
+                showDialog(
+                  context: context,
+                  builder: (context) => const ContactsDialog(),
+                );
+              },
+              child: const Text('Добавить из контактов'),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ContactsDialog extends ConsumerStatefulWidget {
+  const ContactsDialog({super.key});
+
+  @override
+  ConsumerState<ContactsDialog> createState() => _ContactsDialogState();
+}
+
+class _ContactsDialogState extends ConsumerState<ContactsDialog> {
+  bool _isLoading = true;
+  bool _permissionDenied = false;
+  List<Contact> contacts = [];
+  @override
+  void initState() {
+    _fetchContacts();
+    super.initState();
+  }
+
+  Future _fetchContacts() async {
+    if (!await FlutterContacts.requestPermission(readonly: true)) {
+      setState(() => _permissionDenied = true);
+    } else {
+      contacts = await FlutterContacts.getContacts(withProperties: true);
+      setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) return const Center(child: CircularProgressIndicator());
+    if (_permissionDenied) return const Center(child: Text('Permission denied'));
+    final deviceSize = MediaQuery.of(context).size;
+
+    final contactsToShow = contacts.where((e) => e.phones.isNotEmpty).toList();
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Material(
+          child: SizedBox(
+            height: deviceSize.height * .8,
+            width: deviceSize.width * .9,
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: contactsToShow.length,
+              itemBuilder: (context, i) => ListTile(
+                title: Text(contactsToShow[i].displayName),
+                subtitle: Text(
+                  'Phone number: ${contactsToShow[i].phones.isNotEmpty ? contactsToShow[i].phones.first.number : '(none)'}',
+                  style: TextStyle(color: Colors.black.withOpacity(.3)),
+                ),
+                onTap: () {
+                  ref
+                      .read(clientsProvider.notifier)
+                      .add(contactsToShow[i].displayName, contactsToShow[i].phones.first.number, '');
+                  context.pop();
+                },
+              ),
+            ),
+          ),
         ),
       ),
     );

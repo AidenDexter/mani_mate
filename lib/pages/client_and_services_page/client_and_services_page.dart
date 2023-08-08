@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../providers/clients.dart';
 
-import 'add_client_dialog.dart';
+import 'components/add_client_dialog.dart';
 
 class ClientsPage extends StatelessWidget {
   const ClientsPage({super.key});

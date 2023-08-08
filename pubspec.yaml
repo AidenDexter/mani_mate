@@ -25,6 +25,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^21.2.10
   uuid: ^3.0.6
   unixtime: ^1.0.0
+  flutter_contacts: ^1.1.7+1
 
 dev_dependencies:
   flutter_test:
