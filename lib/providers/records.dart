@@ -48,6 +48,7 @@ class Records extends _$Records {
   Future<void> deleteRecordById(String id) async {
     final index = state.value?.indexWhere((element) => element.id == id);
     if (index == null) return;
+    ref.read(notificationProvider).value!.deleteNotification(state.value![index].timeOfCreate);
     await box.deleteAt(index);
     state = AsyncValue.data(box.values.toList());
   }
